@@ -97,7 +97,6 @@ public class AutoSetUserAdapterFilter implements Filter {
 							studentDetailService.casStudent(studentDetail);
 						}
 						session.setAttribute("student", studentDetail);
-						filterChain.doFilter(request, response);
 					} else {
 						TeacherService teacherService = (TeacherService) SpringContextHelper.getBean("teacherService");
 						Teacher teacher = teacherService.casLogin(no);
@@ -112,7 +111,6 @@ public class AutoSetUserAdapterFilter implements Filter {
 						}
 						
 						session.setAttribute("teacher", teacher);
-						filterChain.doFilter(request, response);
 					}
 				}
 
@@ -121,7 +119,7 @@ public class AutoSetUserAdapterFilter implements Filter {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		filterChain.doFilter(request, response);
+		return;
 	}
 
 	@Override

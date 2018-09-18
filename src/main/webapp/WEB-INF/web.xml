@@ -147,7 +147,7 @@
     </filter-mapping>
     
     <welcome-file-list>
-		<welcome-file>init</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 
 	<servlet-mapping>

@@ -25,5 +25,18 @@
 <form action="zdtype/2018/exportMB" method="post" id="form2">
     <input type="submit" id="exportExcel" name="exportExcel" value="Excel导出"/>
 </form>
+
+<script type="text/javascript">
+<%
+if(request.getSession().getAttribute("teacher")!=null){
+%>
+window.location.href="student/2018/home";
+<%
+}
+if(request.getSession().getAttribute("student")!=null){
+%>
+window.location.href="student/studentdetail";
+<%}%>
+</script>
 </body>
 </html>
