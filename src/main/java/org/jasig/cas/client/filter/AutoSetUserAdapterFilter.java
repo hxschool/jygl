@@ -81,8 +81,7 @@ public class AutoSetUserAdapterFilter implements Filter {
 				if (!StringUtils.isEmpty(roleIds)) {
 
 					if (!Arrays.asList(roleIds).contains("99")) {
-						StudentDetailService studentDetailService = (StudentDetailService) SpringContextHelper
-								.getBean("studentDetailService");
+						StudentDetailService studentDetailService = (StudentDetailService) SpringContextHelper.getBean("studentDetailService");
 						StudentDetail studentDetail = studentDetailService.casLogin(no);
 						if (StringUtils.isEmpty(studentDetail)) {
 							studentDetail = new StudentDetail();
