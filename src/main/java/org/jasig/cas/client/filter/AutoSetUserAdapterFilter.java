@@ -2,6 +2,7 @@ package org.jasig.cas.client.filter;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 import javax.servlet.Filter;
@@ -70,12 +71,16 @@ public class AutoSetUserAdapterFilter implements Filter {
 			if(StringUtils.isEmpty(loginname)) {
 				loginname = no;
 			}
-			String usertype = (String) attributes.get("userType");
+			String roleId = (String)attributes.get("roleId");
+			
+			roleId = roleId.replaceAll("[\\[\\]]", "");  
+			
+			String[] roleIds = roleId.split(",");
 		
 
-				if (!StringUtils.isEmpty(usertype)) {
+				if (!StringUtils.isEmpty(roleIds)) {
 
-					if (usertype.equals("99")) {
+					if (!Arrays.asList(roleIds).contains("99")) {
 						StudentDetailService studentDetailService = (StudentDetailService) SpringContextHelper
 								.getBean("studentDetailService");
 						StudentDetail studentDetail = studentDetailService.casLogin(no);
@@ -84,7 +89,7 @@ public class AutoSetUserAdapterFilter implements Filter {
 							Date date = new Date();
 							SimpleDateFormat fomat = new SimpleDateFormat("yyyyMMddHHmmss");
 							String mydate = fomat.format(date);
-							studentDetail.setKsh("888888".concat(mydate));
+							studentDetail.setKsh(no);
 							studentDetail.setSfzh(loginname);
 							studentDetail.setMobilePhone(phone);
 							studentDetail.setXm(name);
@@ -92,6 +97,7 @@ public class AutoSetUserAdapterFilter implements Filter {
 							studentDetailService.casStudent(studentDetail);
 						}
 						session.setAttribute("student", studentDetail);
+						filterChain.doFilter(request, response);
 					} else {
 						TeacherService teacherService = (TeacherService) SpringContextHelper.getBean("teacherService");
 						Teacher teacher = teacherService.casLogin(no);
@@ -106,6 +112,7 @@ public class AutoSetUserAdapterFilter implements Filter {
 						}
 						
 						session.setAttribute("teacher", teacher);
+						filterChain.doFilter(request, response);
 					}
 				}
 
