@@ -12,7 +12,7 @@
 	<script type="text/javascript" src="https://t4.chei.com.cn/passport/js/common_rosters.js"></script>
 	<link rel="icon" href="/passport/favicon.ico" type="image/x-icon" />
 	<!-- css 样式 -->
-	<link rel="stylesheet" type="text/css" href="style/css/login.css"/>
+	<link rel="stylesheet" type="text/css" href="css/login.css"/>
 
 
 

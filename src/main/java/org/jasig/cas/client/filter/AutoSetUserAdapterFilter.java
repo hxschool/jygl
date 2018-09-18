@@ -76,11 +76,12 @@ public class AutoSetUserAdapterFilter implements Filter {
 			roleId = roleId.replaceAll("[\\[\\]]", "");  
 			
 			String[] roleIds = roleId.split(",");
-		
+			System.out.println("roleIds:[]" + roleIds);
 
 				if (!StringUtils.isEmpty(roleIds)) {
 
-					if (!Arrays.asList(roleIds).contains("99")) {
+					if (Arrays.asList(roleIds).contains("99")) {
+						
 						StudentDetailService studentDetailService = (StudentDetailService) SpringContextHelper.getBean("studentDetailService");
 						StudentDetail studentDetail = studentDetailService.casLogin(no);
 						if (StringUtils.isEmpty(studentDetail)) {
