@@ -15,7 +15,7 @@
   </listener>
     <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>classpath:classpath:spring-*.xml</param-value>
+    <param-value>classpath*:/spring-*.xml</param-value>
   </context-param>
     <!--用maven创建的web-app需要修改servlet的版本为3.1-->
     <!--配置DispatcherServlet-->
