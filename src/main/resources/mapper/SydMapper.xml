@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hxci.dao.SydMapper" >
+  <resultMap id="BaseResultMap" type="com.hxci.pojo.Syd" >
+    <id column="Syszddm" property="syszddm" jdbcType="INTEGER" />
+    <result column="City" property="city" jdbcType="VARCHAR" />
+    <result column="Syszd" property="syszd" jdbcType="VARCHAR" />
+    <result column="Dqlx" property="dqlx" jdbcType="INTEGER" />
+    <result column="level" property="level" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Syszddm,City , Syszd, Dqlx ,level
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from syd
+    where Syszddm = #{syszddm,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from syd
+    where Syszddm = #{syszddm,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hxci.pojo.Syd" >
+    insert into syd (Syszddm,City , Syszd, Dqlx ,level
+      )
+    values (#{syszddm,jdbcType=INTEGER}, #{city,jdbcType=VARCHAR}，#{dqlx,jdbcType=INTEGER}, #{syszd,jdbcType=VARCHAR}, #{level,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hxci.pojo.Syd" >
+    insert into syd
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="syszddm != null" >
+        Syszddm,
+      </if>
+      <if test="city != null" >
+        City,
+      </if>
+      <if test="syszd != null" >
+        Syszd,
+      </if>
+      <if test="dqlx != null" >
+        Dqlx,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="syszddm != null" >
+        #{syszddm,jdbcType=INTEGER},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=INTEGER},
+      </if>
+      <if test="syszd != null" >
+        #{syszd,jdbcType=VARCHAR},
+      </if>
+      <if test="dqlx != null" >
+        #{dqlx,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hxci.pojo.Syd" >
+    update syd
+    <set >
+      <if test="city != null" >
+        City = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="syszd != null" >
+        Syszd = #{syszd,jdbcType=VARCHAR},
+      </if>
+      <if test="dqlx != null" >
+        Dqlx = #{dqlx,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Syszddm = #{syszddm,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hxci.pojo.Syd" >
+    update syd
+    set
+      City = #{city,jdbcType=VARCHAR},
+      Syszd = #{syszd,jdbcType=VARCHAR},
+      Dqlx = #{dqlx,jdbcType=VARCHAR},
+      level = #{level,jdbcType=VARCHAR}
+    where Syszddm = #{syszddm,jdbcType=INTEGER}
+  </update>
+</mapper>

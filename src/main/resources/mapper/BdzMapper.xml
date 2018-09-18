@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hxci.dao.BdzMapper" >
+  <resultMap id="BaseResultMap" type="com.hxci.pojo.Bdz" >
+    <result column="Bdzqflbdm" property="bdzqflbdm" jdbcType="INTEGER" />
+    <result column="Bdzqflb" property="bdzqflb" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    bdzqflbdm,bdzqflb
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from bdz
+    where Bdzqflbdm = #{bdzqflbdm,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap"  >
+    select
+    <include refid="Base_Column_List" />
+    from bdz
+  </select>
+  <insert id="insert" parameterType="com.hxci.pojo.Bdz" >
+    insert into bdz (Bdzqflbdm, Bdzqflb)
+    values (#{bdzqflbdm,jdbcType=INTEGER}, #{bdzqflb,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hxci.pojo.Bdz" >
+    insert into bdz
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bdzqflbdm != null" >
+        Bdzqflbdm,
+      </if>
+      <if test="bdzqflb != null" >
+        Bdzqflb,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bdzqflbdm != null" >
+        #{bdzqflbdm,jdbcType=INTEGER},
+      </if>
+      <if test="bdzqflb != null" >
+        #{bdzqflb,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

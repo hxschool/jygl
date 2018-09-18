@@ -1,0 +1,179 @@
+
+                      #log-dropdown{padding:2px 4px;color:#428bca;}
+#log-dropdown:hover{text-decoration: none;}
+.opt-btns-wrap {
+    border-right: 0px;
+}
+
+.opt-btns-wrap .panel-body {
+    padding: 0px;
+}
+
+.opt-btns-wrap ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.opt-btns-wrap li {
+    float: left;
+    width: 25%;
+    border-right: 1px solid #ddd;
+    padding: 20px 0px;
+    display: table;
+    text-align: center;
+}
+
+.index-table {
+    width: 100%;
+    text-align: center;
+}
+
+.index-table tr {
+    height: 38px;
+}
+
+.index-table tr:last-child {
+    font-size: 22px;
+}
+
+.log-list-content-box {
+    padding-left: 12px;
+    padding-bottom: 50px;
+    border-left: 1px solid #e3e3e3;
+    min-height: 50px;
+    position: relative;
+    padding-bottom: 12px;
+}
+
+.log-item {
+    margin-bottom: 15px;
+}
+
+.log-item-mask {
+    position: absolute;
+    width: 10px;
+    height: 15px;
+    background-color: #FFF;
+    top: -2px;
+    left: -8px;
+}
+
+.log-item-date {
+    font-size: 18px;
+    line-height: 36px;
+    margin-left: -18px;
+    display: inline;
+}
+
+.icon-circle {
+    display: inline-block;
+    margin-right: 8px;
+    background: #e3e3e3;
+    height: 12px;
+    width: 12px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+}
+
+.log-item-content {
+    font-size: 14px;
+    line-height: 1.5em;
+}
+
+.log-list-content-more,.college-list-more {
+    text-align: center;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.college-box-title {
+    margin-top: 0px;
+    font-size: 16px;
+    padding-left: 5px;
+    border-left: 4px solid #0099cc;
+    height: 22px;
+    line-height: 22px;
+}
+
+.college-box-content {
+    padding: 0px 12px 15px 12px;
+    border-bottom: 1px dotted #ccc;
+    margin-bottom: 15px;
+}
+
+.college-box-btn {
+    display: inline-block;
+    float: right;
+    cursor: pointer;
+    font-size: 12px;
+    height: 20px;
+    line-height: 20px;
+}
+
+.college-tab {
+    margin-bottom: 0px;
+    display: none;
+}
+
+.college-tab>thead,.college-tab>tbody {
+    font-size: 13px;
+    text-align: center;
+}
+
+.toolbar>.col-md-2 {
+    text-align: center;
+}
+.toolbar>.col-md-2 a.disabled{color:#ccc;cursor: default;}
+.toolbar>.col-md-2 a.disabled:hover{color:#ccc;cursor: default;text-decoration: none;}
+.toolbar>.col-md-2 a {
+    display: inline-block;
+    margin: 20px 0px;
+    color: #808080;
+}
+
+.toolbar>.col-md-2 a:hover {
+    color: #428bca;
+}
+
+.toolbar>.col-md-2 a.stu-del:hover {
+    color: #da4f49;
+}
+.toolbar>.col-md-2 a.stu-del.disabled:hover {
+    color: #ccc;
+}
+
+.toolbar>.col-md-2 span {
+    font-size: 24px;
+}
+
+.toolbar>.tool-icon:after {
+    position: absolute;
+    top: 15px;
+    bottom: 15px;
+    right: 0;
+    content: '';
+    border-right: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+#dataRecovery label {
+    font-size: 14px;
+}
+
+#dataRecoverySure {
+    margin-left: 15px;
+}
+
+.recoveryWaiting {
+    display: none;
+    text-align: center;
+}
+
+#dataRecoveryAgin {
+    display: none;
+}
+
+#recoveryError {
+    color: #FF0000;
+}

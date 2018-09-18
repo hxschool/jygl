@@ -1,0 +1,1096 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hxci.dao.StudentDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.hxci.pojo.StudentDetail" >
+    <id column="Ksh" property="ksh" jdbcType="VARCHAR" />
+    <id column="Sfzh" property="sfzh" jdbcType="VARCHAR" />
+    <result column="Xm" property="xm" jdbcType="VARCHAR" />
+    <collection property="xb" ofType="com.hxci.pojo.Xb">
+      <id column="Xbdm" property="xbdm" />
+      <result column="Xb" property="xb" />
+    </collection>
+  </resultMap>
+  <resultMap type="com.hxci.pojo.StudentDetail" id="studentDetail">
+    <!--
+         property:表示本类中关联的对象属性
+         dept_id:表示本类的表中哪一列的值将传入select语句中作为参数进行查询
+         select:表示查询出关联对象的语句,,
+                              其格式为该关联对象的类所配置的mapper映射文件的sql语句地址,为其文件中的namespace+sql语句的id
+        -->
+    <association property="bdzqflb" column="Bdzqflbdm" select="com.hxci.dao.BdzMapper.selectByPrimaryKey"/>
+    <association property="byqx" column="Byqxdm" select="com.hxci.dao.ByqxMapper.selectByPrimaryKey"/>
+    <association property="dwhy" column="Dwhydm" select="com.hxci.dao.DwhyMapper.selectByPrimaryKey"/>
+    <association property="dwszd" column="Dwszddm" select="com.hxci.dao.DwszdMapper.selectByPrimaryKey"/>
+    <association property="dwxz" column="Dwxzdm" select="com.hxci.dao.DwxzMapper.selectByPrimaryKey"/>
+    <association property="gzzwlb" column="Gzzwlbdm" select="com.hxci.dao.GzzwMapper.selectByPrimaryKey"/>
+    <association property="knslb" column="Knslbdm" select="com.hxci.dao.KnlbMapper.selectByPrimaryKey"/>
+    <association property="mz" column="Mzdm" select="com.hxci.dao.MzMapper.selectByPrimaryKey"/>
+    <association property="pyfs" column="Pyfsdm" select="com.hxci.dao.PyfsMapper.selectByPrimaryKey"/>
+    <association property="sfslb" column="Sfslbdm" select="com.hxci.dao.SfsMapper.selectByPrimaryKey"/>
+    <association property="syszd" column="Syszddm" select="com.hxci.dao.SydMapper.selectByPrimaryKey"/>
+
+    <association property="xb" column="Xbdm" select="com.hxci.dao.XbMapper.selectByPrimaryKey"/>
+
+    <association property="xl" column="Xldm" select="com.hxci.dao.XlMapper.selectByPrimaryKey"/>
+    <association property="yx" column="Yxdm" select="com.hxci.dao.YxMapper.selectByPrimaryKey"/>
+    <association property="zy" column="Zydm" select="com.hxci.dao.ZyMapper.selectByPrimaryKey"/>
+    <association property="qwdwszd" column="qwdwszddm" select="com.hxci.dao.QwdwszdMapper.selectByPrimaryKey"/>
+    <association property="zzmm" column="Zzmmdm" select="com.hxci.dao.ZzmmMapper.selectByPrimaryKey"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Ksh, Sfzh, Xm, Xbdm, Mzdm, Zzmmdm, Yxdm, Fxmc, Xldm, Zydm, Zyfx, Pyfsdm, Dxhwpdw, 
+    Syszddm, Cxsy, Xz, Rxsj, Bysj, Sfslbdm, Knslbdm, Szyx, Szbj, Xh, Csrq, Rxqdaszdw, 
+    Rxqhkszdpcs, Dasfzrxx, Hksfzrxx, MobilePhone, Email, Qq, Jtdz, Jtdh, Jtyb, Byqxdm, 
+    Dwzzjgdm, Dwmc, Dwxzdm, Dwhydm, Dwszddm, Gzzwlbdm, Dwlxr, Lxrdh, Lxrsj, Lxrdzyx, 
+    Lxrcz, Dwdz, Dwyb, Bdzqflbdm, Bdzqwdwmc, Qwdwszddm, Bdzbh, Bdqssj, Dazjdwmc, Dazjdwdz, 
+    Dazjdwyb, Hkqzdz,isInsert,password
+  </sql>
+  <sql id="Column_List_ALL" >
+    Ksh, Sfzh, Xm, Xbdm, Mzdm, Zzmmdm, Yxdm, Fxmc, Xldm, Zydm, Zyfx, Pyfsdm, Dxhwpdw,
+    Syszddm, Cxsy, Xz, Rxsj, Bysj, Sfslbdm, Knslbdm, Szyx, Szbj, Xh, Csrq, Rxqdaszdw,
+    Rxqhkszdpcs, Dasfzrxx, Hksfzrxx, MobilePhone, Email, Qq, Jtdz, Jtdh, Jtyb, Byqxdm,
+    Dwzzjgdm, Dwmc, Dwxzdm, Dwhydm, Dwszddm, Gzzwlbdm, Dwlxr, Lxrdh, Lxrsj, Lxrdzyx,
+    Lxrcz, Dwdz, Dwyb, Bdzqflbdm, Bdzqwdwmc, Qwdwszddm, Bdzbh, Bdqssj, Dazjdwmc, Dazjdwdz,
+    Dazjdwyb, Hkqzdz,isInsert,password
+  </sql>
+  
+  <select id="casLogin" resultType="studentDetail">
+    SELECT * FROM studentdetail WHERE xh=#{studentNumber}
+  </select>
+  
+  <select id="findByStudent" resultType="studentDetail" parameterType="java.lang.String">
+    SELECT * FROM studentdetail WHERE xh=#{xh}
+  </select>
+  
+ <insert id="casStudent" parameterType="com.hxci.pojo.StudentDetail" >
+ INSERT INTO studentdetail(ksh, sfzh, xm, xh) 
+	VALUES(#{ksh},#{sfzh},#{xm},#{xh})
+ </insert>
+
+  <select id="getByBysj" resultType="studentDetail">
+    SELECT Ksh , Sfzh FROM studentdetail WHERE Bysj LIKE #{date}
+  </select>
+
+  <select id="selectByTwoTerm" resultMap="studentDetail" parameterType="com.hxci.pojo.StudentDetail">
+
+    SELECT * FROM studentdetail WHERE ksh=#{ksh,jdbcType=VARCHAR} AND Xm=#{xm,jdbcType=VARCHAR}
+
+  </select>
+
+  <select id="selectPortion" resultMap="studentDetail" parameterType="com.hxci.pojo.StudentDetail">
+
+    SELECT
+    *
+    FROM
+    studentdetail
+    WHERE Bysj LIKE #{bysj,jdbcType=VARCHAR}
+    <if test="ksh != null and ksh!=''" >
+      AND (Ksh=#{ksh} OR Xm=#{ksh} OR Sfzh=#{ksh} OR Xh=#{ksh} OR Szyx=#{ksh})
+    </if>
+    <if test="szyx != null and szyx!=''" >
+      AND Szyx=#{szyx}
+    </if>
+    limit #{startPage},#{size }
+  </select>
+
+  <select id="selectCount" resultType="int" >
+    select count(1) from studentdetail WHERE Bysj LIKE #{bysj}
+    <if test="szyx != null and szyx!=''" >
+      AND Szyx = #{szyx}
+    </if>
+
+  </select>
+
+  <select id="selectAllCountList" resultType="java.util.LinkedHashMap" parameterType="java.lang.String">
+    select count(Szyx) count  ,Szyx from studentdetail   where Bysj LIKE #{date} group by Szyx
+  </select>
+
+  <select id="selectByList" resultType="java.util.LinkedHashMap" parameterType="com.hxci.pojo.StudentDetail" >
+    select
+        Ksh,Sfzh,Xm,xb.Xbdm,xb.Xb,mz.Mzdm,mz.Mz,zzmm.Zzmmdm,zzmm.Zzmm,
+        yx.Yxdm,yx.Yxmc,Fxmc,xl.Xldm,xl.Xl,zy.Zydm,zy.Zy,Zyfx,pyfs.Pyfsdm,pyfs.Pyfs,
+        Dxhwpdw,syd.Syszddm,syd.Syszd,Cxsy,Xz,Rxsj,Bysj,sfs.Sfslbdm,sfs.Sfslb,knlb.Knslbdm,knlb.Knslb,
+        Szyx,Szbj,Xh,Csrq,Rxqdaszdw,Rxqhkszdpcs,Dasfzrxx,Hksfzrxx,MobilePhone,Email,Qq,Jtdz,Jtdh,Jtyb,
+        byqx.Byqxdm,byqx.Byqx,Dwzzjgdm,Dwmc,dwxz.Dwxzdm,dwxz.Dwxz,dwhy.Dwhydm,dwhy.Dwhy,dwszd.Dwszddm,dwszd.Dwszd,
+        gzzw.Gzzwlbdm,gzzw.Gzzwlb,Dwlxr,Lxrdh,Lxrsj,Lxrdzyx,Lxrcz,Dwdz,Dwyb,bdz.Bdzqflbdm,bdz.Bdzqflb,
+        Bdzqwdwmc,qwdwszd.Qwdwszddm,qwdwszd.Qwdwszd,Bdzbh,Bdqssj,Dazjdwmc,Dazjdwdz,Dazjdwyb,Hkqzdz
+      from studentdetail s left
+      JOIN mz ON s.Mzdm=mz.Mzdm left
+      JOIN zzmm ON zzmm.Zzmmdm=s.Zzmmdm left
+      JOIN xb ON xb.Xbdm=s.Xbdm left
+      JOIN yx ON yx.Yxdm=s.Yxdm left
+      JOIN xl ON xl.Xldm=s.Xldm left
+      JOIN zy ON zy.Zydm=s.Zydm left
+      JOIN pyfs ON pyfs.Pyfsdm=s.pyfsdm left
+      JOIN syd ON syd.Syszddm=s.Syszddm left
+      JOIN sfs ON sfs.Sfslbdm=s.Sfslbdm left
+      JOIN knlb ON knlb.Knslbdm=s.Knslbdm left
+      JOIN byqx ON byqx.Byqxdm=s.Byqxdm left
+      JOIN dwxz ON dwxz.Dwxzdm=s.Dwxzdm left
+      JOIN dwhy ON dwhy.Dwhydm=s.Dwhydm left
+      JOIN dwszd ON dwszd.Dwszddm=s.Dwszddm left
+      JOIN gzzw ON gzzw.Gzzwlbdm=s.Gzzwlbdm left
+      JOIN bdz ON bdz.Bdzqflbdm=s.Bdzqflbdm left
+      JOIN qwdwszd ON qwdwszd.Qwdwszddm=s.Qwdwszddm
+      <where>
+      	Bysj LIKE #{bysj,jdbcType=VARCHAR}
+      	<if test="szyx neq null">
+      		and szyx=#{szyx,jdbcType=VARCHAR}
+      	</if>
+      </where>
+  </select>
+
+  <select id="selectByPrimaryKey"  resultMap="BaseResultMap" parameterType="com.hxci.pojo.StudentDetail" >
+    select 
+    <include refid="Base_Column_List" />
+    from studentdetail
+    where Ksh = #{ksh,jdbcType=VARCHAR}
+      and Sfzh = #{sfzh,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByLogin"  resultMap="studentDetail" parameterType="com.hxci.pojo.StudentDetail" >
+    select
+      *
+    from studentdetail
+    where Xh = #{xh,jdbcType=VARCHAR}
+    and password = #{password,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByStudent"  resultMap="studentDetail" parameterType="com.hxci.pojo.StudentDetail" >
+    select
+      *
+    from studentdetail
+    where Xh = #{xh,jdbcType=VARCHAR}
+    and sfzh = #{sfzh,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="com.hxci.pojo.StudentDetail" >
+    delete from studentdetail
+    where Ksh = #{ksh,jdbcType=VARCHAR}
+      and Sfzh = #{sfzh,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hxci.pojo.StudentDetail" >
+    insert into studentdetail (Ksh, Sfzh, Xm, 
+      Xbdm, Mzdm, Zzmmdm, 
+      Yxdm, Fxmc, Xldm, Zydm, 
+      Zyfx, Pyfsdm, Dxhwpdw, 
+      Syszddm, Cxsy, Xz, 
+      Rxsj, Bysj, Sfslbdm, 
+      Knslbdm, Szyx, Szbj, 
+      Xh, Csrq, Rxqdaszdw, 
+      Rxqhkszdpcs, Dasfzrxx, Hksfzrxx, 
+      MobilePhone, Email, Qq, 
+      Jtdz, Jtdh, Jtyb, Byqxdm, 
+      Dwzzjgdm, Dwmc, Dwxzdm, 
+      Dwhydm, Dwszddm, Gzzwlbdm, 
+      Dwlxr, Lxrdh, Lxrsj, 
+      Lxrdzyx, Lxrcz, Dwdz, 
+      Dwyb, Bdzqflbdm, Bdzqwdwmc, 
+      Qwdwszddm, Bdzbh, Bdqssj, 
+      Dazjdwmc, Dazjdwdz, Dazjdwyb, 
+      Hkqzdz)
+    values (#{ksh,jdbcType=VARCHAR}, #{sfzh,jdbcType=VARCHAR}, #{xm,jdbcType=VARCHAR},
+      #{xbdm,jdbcType=INTEGER}, #{mzdm,jdbcType=VARCHAR}, #{zzmmdm,jdbcType=VARCHAR},
+      #{yxdm,jdbcType=INTEGER}, #{fxmc,jdbcType=VARCHAR}, #{xldm,jdbcType=VARCHAR}, #{zydm,jdbcType=VARCHAR},
+      #{zyfx,jdbcType=VARCHAR}, #{pyfsdm,jdbcType=INTEGER}, #{dxhwpdw,jdbcType=VARCHAR},
+      #{syszddm,jdbcType=INTEGER}, #{cxsy,jdbcType=VARCHAR}, #{xz,jdbcType=VARCHAR},
+      #{rxsj,jdbcType=VARCHAR}, #{bysj,jdbcType=VARCHAR}, #{sfslbdm,jdbcType=INTEGER},
+      #{knslbdm,jdbcType=INTEGER}, #{szyx,jdbcType=VARCHAR}, #{szbj,jdbcType=VARCHAR},
+      #{xh,jdbcType=VARCHAR}, #{csrq,jdbcType=VARCHAR}, #{rxqdaszdw,jdbcType=VARCHAR},
+      #{rxqhkszdpcs,jdbcType=VARCHAR}, #{dasfzrxx,jdbcType=VARCHAR}, #{hksfzrxx,jdbcType=VARCHAR},
+      #{mobilePhone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR},
+      #{jtdz,jdbcType=VARCHAR}, #{jtdh,jdbcType=VARCHAR}, #{jtyb,jdbcType=VARCHAR}, #{byqxdm,jdbcType=INTEGER},
+      #{dwzzjgdm,jdbcType=VARCHAR}, #{dwmc,jdbcType=VARCHAR}, #{dwxzdm,jdbcType=INTEGER},
+      #{dwhydm,jdbcType=INTEGER}, #{dwszddm,jdbcType=INTEGER}, #{gzzwlbdm,jdbcType=INTEGER},
+      #{dwlxr,jdbcType=VARCHAR}, #{lxrdh,jdbcType=VARCHAR}, #{lxrsj,jdbcType=VARCHAR},
+      #{lxrdzyx,jdbcType=VARCHAR}, #{lxrcz,jdbcType=VARCHAR}, #{dwdz,jdbcType=VARCHAR},
+      #{dwyb,jdbcType=VARCHAR}, #{bdzqflbdm,jdbcType=INTEGER}, #{bdzqwdwmc,jdbcType=VARCHAR},
+      #{qwdwszddm,jdbcType=VARCHAR}, #{bdzbh,jdbcType=VARCHAR}, #{bdqssj,jdbcType=VARCHAR},
+      #{dazjdwmc,jdbcType=VARCHAR}, #{dazjdwdz,jdbcType=VARCHAR}, #{dazjdwyb,jdbcType=VARCHAR},
+      #{hkqzdz,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hxci.pojo.StudentDetail" >
+    insert into studentdetail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ksh != null  " >
+        Ksh,
+      </if>
+      <if test="sfzh != null " >
+        Sfzh,
+      </if>
+      <if test="xm != null " >
+        Xm,
+      </if>
+      <if test="xbdm != null " >
+        Xbdm,
+      </if>
+      <if test="mzdm != null " >
+        Mzdm,
+      </if>
+      <if test="zzmmdm != null " >
+        Zzmmdm,
+      </if>
+      <if test="yxdm != null " >
+        Yxdm,
+      </if>
+      <if test="fxmc != null" >
+        Fxmc,
+      </if>
+      <if test="xldm != null " >
+        Xldm,
+      </if>
+      <if test="zydm != null " >
+        Zydm,
+      </if>
+      <if test="zyfx != null " >
+        Zyfx,
+      </if>
+      <if test="pyfsdm != null " >
+        Pyfsdm,
+      </if>
+      <if test="dxhwpdw != null " >
+        Dxhwpdw,
+      </if>
+      <if test="syszddm != null " >
+        Syszddm,
+      </if>
+      <if test="cxsy != null " >
+        Cxsy,
+      </if>
+      <if test="xz != null " >
+        Xz,
+      </if>
+      <if test="rxsj != null " >
+        Rxsj,
+      </if>
+      <if test="bysj != null" >
+        Bysj,
+      </if>
+      <if test="sfslbdm != null " >
+        Sfslbdm,
+      </if>
+      <if test="knslbdm != null" >
+        Knslbdm,
+      </if>
+      <if test="szyx != null " >
+        Szyx,
+      </if>
+      <if test="szbj != null " >
+        Szbj,
+      </if>
+      <if test="xh != null " >
+        Xh,
+      </if>
+      <if test="csrq != null " >
+        Csrq,
+      </if>
+      <if test="rxqdaszdw != null " >
+        Rxqdaszdw,
+      </if>
+      <if test="rxqhkszdpcs != null " >
+        Rxqhkszdpcs,
+      </if>
+      <if test="dasfzrxx != null " >
+        Dasfzrxx,
+      </if>
+      <if test="hksfzrxx != null" >
+        Hksfzrxx,
+      </if>
+      <if test="mobilePhone != null " >
+        MobilePhone,
+      </if>
+      <if test="email != null" >
+        Email,
+      </if>
+      <if test="qq != null " >
+        Qq,
+      </if>
+      <if test="jtdz != null " >
+        Jtdz,
+      </if>
+      <if test="jtdh != null" >
+        Jtdh,
+      </if>
+      <if test="jtyb != null " >
+        Jtyb,
+      </if>
+      <if test="byqxdm != null " >
+        Byqxdm,
+      </if>
+      <if test="dwzzjgdm != null" >
+        Dwzzjgdm,
+      </if>
+      <if test="dwmc != null " >
+        Dwmc,
+      </if>
+      <if test="dwxzdm != null " >
+        Dwxzdm,
+      </if>
+      <if test="dwhydm != null " >
+        Dwhydm,
+      </if>
+      <if test="dwszddm != null " >
+        Dwszddm,
+      </if>
+      <if test="gzzwlbdm != null " >
+        Gzzwlbdm,
+      </if>
+      <if test="dwlxr != null " >
+        Dwlxr,
+      </if>
+      <if test="lxrdh != null " >
+        Lxrdh,
+      </if>
+      <if test="lxrsj != null " >
+        Lxrsj,
+      </if>
+      <if test="lxrdzyx != null " >
+        Lxrdzyx,
+      </if>
+      <if test="lxrcz != null " >
+        Lxrcz,
+      </if>
+      <if test="dwdz != null " >
+        Dwdz,
+      </if>
+      <if test="dwyb != null" >
+        Dwyb,
+      </if>
+      <if test="bdzqflbdm != null " >
+        Bdzqflbdm,
+      </if>
+      <if test="bdzqwdwmc != null " >
+        Bdzqwdwmc,
+      </if>
+      <if test="qwdwszddm != null " >
+        Qwdwszddm,
+      </if>
+      <if test="bdzbh != null " >
+        Bdzbh,
+      </if>
+      <if test="bdqssj != null " >
+        Bdqssj,
+      </if>
+      <if test="dazjdwmc != null " >
+        Dazjdwmc,
+      </if>
+      <if test="dazjdwdz != null " >
+        Dazjdwdz,
+      </if>
+      <if test="dazjdwyb != null" >
+        Dazjdwyb,
+      </if>
+      <if test="hkqzdz != null " >
+        Hkqzdz,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ksh != null " >
+        #{ksh,jdbcType=VARCHAR},
+      </if>
+      <if test="sfzh != null " >
+        #{sfzh,jdbcType=VARCHAR},
+      </if>
+      <if test="xm != null " >
+        #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="xbdm != null" >
+        #{xbdm,jdbcType=INTEGER},
+      </if>
+      <if test="mzdm != null" >
+        #{mzdm,jdbcType=VARCHAR},
+      </if>
+      <if test="zzmmdm != null " >
+        #{zzmmdm,jdbcType=VARCHAR},
+      </if>
+      <if test="yxdm != null " >
+        #{yxdm,jdbcType=INTEGER},
+      </if>
+      <if test="fxmc != null " >
+        #{fxmc,jdbcType=VARCHAR},
+      </if>
+      <if test="xldm != null " >
+        #{xldm,jdbcType=VARCHAR},
+      </if>
+      <if test="zydm != null " >
+        #{zydm,jdbcType=VARCHAR},
+      </if>
+      <if test="zyfx != null " >
+        #{zyfx,jdbcType=VARCHAR},
+      </if>
+      <if test="pyfsdm != null " >
+        #{pyfsdm,jdbcType=INTEGER},
+      </if>
+      <if test="dxhwpdw != null " >
+        #{dxhwpdw,jdbcType=VARCHAR},
+      </if>
+      <if test="syszddm != null " >
+        #{syszddm,jdbcType=INTEGER},
+      </if>
+      <if test="cxsy != null " >
+        #{cxsy,jdbcType=VARCHAR},
+      </if>
+      <if test="xz != null " >
+        #{xz,jdbcType=VARCHAR},
+      </if>
+      <if test="rxsj != null " >
+        #{rxsj,jdbcType=VARCHAR},
+      </if>
+      <if test="bysj != null " >
+        #{bysj,jdbcType=VARCHAR},
+      </if>
+      <if test="sfslbdm != null " >
+        #{sfslbdm,jdbcType=INTEGER},
+      </if>
+      <if test="knslbdm != null " >
+        #{knslbdm,jdbcType=INTEGER},
+      </if>
+      <if test="szyx != null " >
+        #{szyx,jdbcType=VARCHAR},
+      </if>
+      <if test="szbj != null" >
+        #{szbj,jdbcType=VARCHAR},
+      </if>
+      <if test="xh != null " >
+        #{xh,jdbcType=VARCHAR},
+      </if>
+      <if test="csrq != null " >
+        #{csrq,jdbcType=VARCHAR},
+      </if>
+      <if test="rxqdaszdw != null " >
+        #{rxqdaszdw,jdbcType=VARCHAR},
+      </if>
+      <if test="rxqhkszdpcs != null " >
+        #{rxqhkszdpcs,jdbcType=VARCHAR},
+      </if>
+      <if test="dasfzrxx != null " >
+        #{dasfzrxx,jdbcType=VARCHAR},
+      </if>
+      <if test="hksfzrxx != null " >
+        #{hksfzrxx,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilePhone != null " >
+        #{mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null " >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null " >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="jtdz != null " >
+        #{jtdz,jdbcType=VARCHAR},
+      </if>
+      <if test="jtdh != null " >
+        #{jtdh,jdbcType=VARCHAR},
+      </if>
+      <if test="jtyb != null " >
+        #{jtyb,jdbcType=VARCHAR},
+      </if>
+      <if test="byqxdm != null " >
+        #{byqxdm,jdbcType=INTEGER},
+      </if>
+      <if test="dwzzjgdm != null" >
+        #{dwzzjgdm,jdbcType=VARCHAR},
+      </if>
+      <if test="dwmc != null " >
+        #{dwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="dwxzdm != null " >
+        #{dwxzdm,jdbcType=INTEGER},
+      </if>
+      <if test="dwhydm != null " >
+        #{dwhydm,jdbcType=INTEGER},
+      </if>
+      <if test="dwszddm != null " >
+        #{dwszddm,jdbcType=INTEGER},
+      </if>
+      <if test="gzzwlbdm != null " >
+        #{gzzwlbdm,jdbcType=INTEGER},
+      </if>
+      <if test="dwlxr != null " >
+        #{dwlxr,jdbcType=VARCHAR},
+      </if>
+      <if test="lxrdh != null" >
+        #{lxrdh,jdbcType=VARCHAR},
+      </if>
+      <if test="lxrsj != null " >
+        #{lxrsj,jdbcType=VARCHAR},
+      </if>
+      <if test="lxrdzyx != null " >
+        #{lxrdzyx,jdbcType=VARCHAR},
+      </if>
+      <if test="lxrcz != null " >
+        #{lxrcz,jdbcType=VARCHAR},
+      </if>
+      <if test="dwdz != null " >
+        #{dwdz,jdbcType=VARCHAR},
+      </if>
+      <if test="dwyb != null "  >
+        #{dwyb,jdbcType=VARCHAR},
+      </if>
+      <if test="bdzqflbdm != null " >
+        #{bdzqflbdm,jdbcType=INTEGER},
+      </if>
+      <if test="bdzqwdwmc != null " >
+        #{bdzqwdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="qwdwszddm != null" >
+        #{qwdwszddm,jdbcType=VARCHAR},
+      </if>
+      <if test="bdzbh != null " >
+        #{bdzbh,jdbcType=VARCHAR},
+      </if>
+      <if test="bdqssj != null " >
+        #{bdqssj,jdbcType=VARCHAR},
+      </if>
+      <if test="dazjdwmc != null " >
+        #{dazjdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="dazjdwdz != null " >
+        #{dazjdwdz,jdbcType=VARCHAR},
+      </if>
+      <if test="dazjdwyb != null " >
+        #{dazjdwyb,jdbcType=VARCHAR},
+      </if>
+      <if test="hkqzdz != null " >
+        #{hkqzdz,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hxci.pojo.StudentDetail" >
+    update studentdetail
+    <set >
+      <if test="xm != null" >
+        Xm = #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="xbdm != null" >
+        Xbdm = #{xbdm,jdbcType=INTEGER},
+      </if>
+      <if test="mzdm != null" >
+        Mzdm = #{mzdm,jdbcType=VARCHAR},
+      </if>
+      <if test="zzmmdm != null" >
+        Zzmmdm = #{zzmmdm,jdbcType=VARCHAR},
+      </if>
+      <if test="yxdm != null" >
+        Yxdm = #{yxdm,jdbcType=INTEGER},
+      </if>
+      <if test="fxmc != null" >
+        Fxmc = #{fxmc,jdbcType=VARCHAR},
+      </if>
+      <if test="xldm != null" >
+        Xldm = #{xldm,jdbcType=VARCHAR},
+      </if>
+      <if test="zydm != null" >
+        Zydm = #{zydm,jdbcType=VARCHAR},
+      </if>
+      <if test="zyfx != null" >
+        Zyfx = #{zyfx,jdbcType=VARCHAR},
+      </if>
+      <if test="pyfsdm != null" >
+        Pyfsdm = #{pyfsdm,jdbcType=INTEGER},
+      </if>
+      <if test="dxhwpdw != null" >
+        Dxhwpdw = #{dxhwpdw,jdbcType=VARCHAR},
+      </if>
+      <if test="syszddm != null" >
+        Syszddm = #{syszddm,jdbcType=INTEGER},
+      </if>
+      <if test="cxsy != null" >
+        Cxsy = #{cxsy,jdbcType=VARCHAR},
+      </if>
+      <if test="xz != null" >
+        Xz = #{xz,jdbcType=VARCHAR},
+      </if>
+      <if test="rxsj != null" >
+        Rxsj = #{rxsj,jdbcType=VARCHAR},
+      </if>
+      <if test="bysj != null" >
+        Bysj = #{bysj,jdbcType=VARCHAR},
+      </if>
+      <if test="sfslbdm != null" >
+        Sfslbdm = #{sfslbdm,jdbcType=INTEGER},
+      </if>
+      <if test="knslbdm != null" >
+        Knslbdm = #{knslbdm,jdbcType=INTEGER},
+      </if>
+      <if test="szyx != null" >
+        Szyx = #{szyx,jdbcType=VARCHAR},
+      </if>
+      <if test="szbj != null" >
+        Szbj = #{szbj,jdbcType=VARCHAR},
+      </if>
+      <if test="xh != null" >
+        Xh = #{xh,jdbcType=VARCHAR},
+      </if>
+      <if test="csrq != null" >
+        Csrq = #{csrq,jdbcType=VARCHAR},
+      </if>
+      <if test="rxqdaszdw != null" >
+        Rxqdaszdw = #{rxqdaszdw,jdbcType=VARCHAR},
+      </if>
+      <if test="rxqhkszdpcs != null" >
+        Rxqhkszdpcs = #{rxqhkszdpcs,jdbcType=VARCHAR},
+      </if>
+      <if test="dasfzrxx != null" >
+        Dasfzrxx = #{dasfzrxx,jdbcType=VARCHAR},
+      </if>
+      <if test="hksfzrxx != null" >
+        Hksfzrxx = #{hksfzrxx,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilePhone != null" >
+        MobilePhone = #{mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        Email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        Qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="jtdz != null" >
+        Jtdz = #{jtdz,jdbcType=VARCHAR},
+      </if>
+      <if test="jtdh != null" >
+        Jtdh = #{jtdh,jdbcType=VARCHAR},
+      </if>
+      <if test="jtyb != null" >
+        Jtyb = #{jtyb,jdbcType=VARCHAR},
+      </if>
+      <if test="byqxdm != null" >
+        Byqxdm = #{byqxdm,jdbcType=INTEGER},
+      </if>
+      <if test="dwzzjgdm != null" >
+        Dwzzjgdm = #{dwzzjgdm,jdbcType=VARCHAR},
+      </if>
+      <if test="dwmc != null" >
+        Dwmc = #{dwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="dwxzdm != null" >
+        Dwxzdm = #{dwxzdm,jdbcType=INTEGER},
+      </if>
+      <if test="dwhydm != null" >
+        Dwhydm = #{dwhydm,jdbcType=INTEGER},
+      </if>
+      <if test="dwszddm != null" >
+        Dwszddm = #{dwszddm,jdbcType=INTEGER},
+      </if>
+      <if test="gzzwlbdm != null" >
+        Gzzwlbdm = #{gzzwlbdm,jdbcType=INTEGER},
+      </if>
+      <if test="dwlxr != null" >
+        Dwlxr = #{dwlxr,jdbcType=VARCHAR},
+      </if>
+      <if test="lxrdh != null" >
+        Lxrdh = #{lxrdh,jdbcType=VARCHAR},
+      </if>
+      <if test="lxrsj != null" >
+        Lxrsj = #{lxrsj,jdbcType=VARCHAR},
+      </if>
+      <if test="lxrdzyx != null" >
+        Lxrdzyx = #{lxrdzyx,jdbcType=VARCHAR},
+      </if>
+      <if test="lxrcz != null" >
+        Lxrcz = #{lxrcz,jdbcType=VARCHAR},
+      </if>
+      <if test="dwdz != null" >
+        Dwdz = #{dwdz,jdbcType=VARCHAR},
+      </if>
+      <if test="dwyb != null" >
+        Dwyb = #{dwyb,jdbcType=VARCHAR},
+      </if>
+      <if test="bdzqflbdm != null" >
+        Bdzqflbdm = #{bdzqflbdm,jdbcType=INTEGER},
+      </if>
+      <if test="bdzqwdwmc != null" >
+        Bdzqwdwmc = #{bdzqwdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="qwdwszddm != null and qwdwszddm != ''" >
+        Qwdwszddm = #{qwdwszddm,jdbcType=VARCHAR},
+      </if>
+      <if test="bdzbh != null" >
+        Bdzbh = #{bdzbh,jdbcType=VARCHAR},
+      </if>
+      <if test="bdqssj != null" >
+        Bdqssj = #{bdqssj,jdbcType=VARCHAR},
+      </if>
+      <if test="dazjdwmc != null" >
+        Dazjdwmc = #{dazjdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="dazjdwdz != null" >
+        Dazjdwdz = #{dazjdwdz,jdbcType=VARCHAR},
+      </if>
+      <if test="dazjdwyb != null" >
+        Dazjdwyb = #{dazjdwyb,jdbcType=VARCHAR},
+      </if>
+      <if test="hkqzdz != null" >
+        Hkqzdz = #{hkqzdz,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null and password != ''" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="isInsert != null" >
+        isInsert = #{isInsert,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Ksh = #{ksh,jdbcType=VARCHAR}
+      and Sfzh = #{sfzh,jdbcType=VARCHAR}
+      and Bysj = #{bysj,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hxci.pojo.StudentDetail" >
+    update studentdetail
+    set Xm = #{xm,jdbcType=VARCHAR},
+      Xbdm = #{xbdm,jdbcType=INTEGER},
+      Mzdm = #{mzdm,jdbcType=VARCHAR},
+      Zzmmdm = #{zzmmdm,jdbcType=VARCHAR},
+      Yxdm = #{yxdm,jdbcType=INTEGER},
+      Fxmc = #{fxmc,jdbcType=VARCHAR},
+      Xldm = #{xldm,jdbcType=VARCHAR},
+      Zydm = #{zydm,jdbcType=VARCHAR},
+      Zyfx = #{zyfx,jdbcType=VARCHAR},
+      Pyfsdm = #{pyfsdm,jdbcType=INTEGER},
+      Dxhwpdw = #{dxhwpdw,jdbcType=VARCHAR},
+      Syszddm = #{syszddm,jdbcType=INTEGER},
+      Cxsy = #{cxsy,jdbcType=VARCHAR},
+      Xz = #{xz,jdbcType=VARCHAR},
+      Rxsj = #{rxsj,jdbcType=VARCHAR},
+      Bysj = #{bysj,jdbcType=VARCHAR},
+      Sfslbdm = #{sfslbdm,jdbcType=INTEGER},
+      Knslbdm = #{knslbdm,jdbcType=INTEGER},
+      Szyx = #{szyx,jdbcType=VARCHAR},
+      Szbj = #{szbj,jdbcType=VARCHAR},
+      Xh = #{xh,jdbcType=VARCHAR},
+      Csrq = #{csrq,jdbcType=VARCHAR},
+      Rxqdaszdw = #{rxqdaszdw,jdbcType=VARCHAR},
+      Rxqhkszdpcs = #{rxqhkszdpcs,jdbcType=VARCHAR},
+      Dasfzrxx = #{dasfzrxx,jdbcType=VARCHAR},
+      Hksfzrxx = #{hksfzrxx,jdbcType=VARCHAR},
+      MobilePhone = #{mobilePhone,jdbcType=VARCHAR},
+      Email = #{email,jdbcType=VARCHAR},
+      Qq = #{qq,jdbcType=VARCHAR},
+      Jtdz = #{jtdz,jdbcType=VARCHAR},
+      Jtdh = #{jtdh,jdbcType=VARCHAR},
+      Jtyb = #{jtyb,jdbcType=VARCHAR},
+      Byqxdm = #{byqxdm,jdbcType=INTEGER},
+      Dwzzjgdm = #{dwzzjgdm,jdbcType=VARCHAR},
+      Dwmc = #{dwmc,jdbcType=VARCHAR},
+      Dwxzdm = #{dwxzdm,jdbcType=INTEGER},
+      Dwhydm = #{dwhydm,jdbcType=INTEGER},
+      Dwszddm = #{dwszddm,jdbcType=INTEGER},
+      Gzzwlbdm = #{gzzwlbdm,jdbcType=INTEGER},
+      Dwlxr = #{dwlxr,jdbcType=VARCHAR},
+      Lxrdh = #{lxrdh,jdbcType=VARCHAR},
+      Lxrsj = #{lxrsj,jdbcType=VARCHAR},
+      Lxrdzyx = #{lxrdzyx,jdbcType=VARCHAR},
+      Lxrcz = #{lxrcz,jdbcType=VARCHAR},
+      Dwdz = #{dwdz,jdbcType=VARCHAR},
+      Dwyb = #{dwyb,jdbcType=VARCHAR},
+      Bdzqflbdm = #{bdzqflbdm,jdbcType=INTEGER},
+      Bdzqwdwmc = #{bdzqwdwmc,jdbcType=VARCHAR},
+      Qwdwszddm = #{qwdwszddm,jdbcType=VARCHAR},
+      Bdzbh = #{bdzbh,jdbcType=VARCHAR},
+      Bdqssj = #{bdqssj,jdbcType=VARCHAR},
+      Dazjdwmc = #{dazjdwmc,jdbcType=VARCHAR},
+      Dazjdwdz = #{dazjdwdz,jdbcType=VARCHAR},
+      Dazjdwyb = #{dazjdwyb,jdbcType=VARCHAR},
+      Hkqzdz = #{hkqzdz,jdbcType=VARCHAR}
+    where Ksh = #{ksh,jdbcType=VARCHAR}
+      and Sfzh = #{sfzh,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updatePassword" parameterType="com.hxci.pojo.StudentDetail" >
+    update studentdetail set password = #{password,jdbcType=VARCHAR} where Sfzh = #{sfzh,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="resetPassword" parameterType="com.hxci.pojo.StudentDetail" >
+    update studentdetail set password = #{password,jdbcType=VARCHAR} where xh = #{xh,jdbcType=VARCHAR}
+  </update>
+  
+  <!-- 统计开始 -->
+  <!-- 按照xxx地址 专业 统计 -->
+  <select id="statisticalSzyx" parameterType="com.hxci.pojo.StudentDetail" resultType="com.hxci.pojo.Statistical">
+  		select substr(s.dwszddm,1,2) code,count(*) count ,p.proname name from studentdetail s 
+			INNER JOIN province p ON p.id = substr(s.dwszddm,1,2) 
+			<where>
+				1=1
+				<if test="szyx != null">
+					and szyx=#{szyx}
+				</if>
+				<if test="xz != null">
+					and xz=#{xz}
+				</if>
+			</where>
+		GROUP BY substr(s.dwszddm,1,2),p.proname ;
+  </select>
+  <!-- 按照xxx地址 专业 统计 -->
+  <select id="statisticalDwhy" parameterType="com.hxci.pojo.StudentDetail" resultType="com.hxci.pojo.Statistical">
+  		select s.Dwhydm code,d.dwhy name , count(*) count from studentdetail s INNER JOIN dwhy d ON d.Dwhydm = s.Dwhydm 
+		<where>
+				1=1
+				<if test="szyx != null">
+					and szyx=#{szyx}
+				</if>
+				<if test="xz != null">
+					and xz=#{xz}
+				</if>
+			</where> 
+		GROUP BY s.Dwhydm , d.Dwhy;
+  </select>
+  <select id="statisticalGzlb" parameterType="com.hxci.pojo.StudentDetail" resultType="com.hxci.pojo.Statistical">
+  		select s.Gzzwlbdm code,g.Gzzwlb name , count(*) count from studentdetail s INNER JOIN gzzw g ON g.Gzzwlbdm = s.Gzzwlbdm 
+		<where>
+				1=1
+				<if test="szyx != null">
+					and szyx=#{szyx}
+				</if>
+				<if test="xz != null">
+					and xz=#{xz}
+				</if>
+			</where> 
+		GROUP BY s.Gzzwlbdm , g.Gzzwlb;
+  </select>
+  <!-- 统计结束 -->
+
+  <update id="updateByPrimaryKeyAndBysjSelective" parameterType="com.hxci.pojo.StudentDetail" >
+    update studentdetail
+    <set >
+      <if test="xm != null" >
+        Xm = #{xm,jdbcType=VARCHAR},
+      </if>
+      <if test="xbdm != null" >
+        Xbdm = #{xbdm,jdbcType=INTEGER},
+      </if>
+      <if test="mzdm != null" >
+        Mzdm = #{mzdm,jdbcType=VARCHAR},
+      </if>
+      <if test="zzmmdm != null" >
+        Zzmmdm = #{zzmmdm,jdbcType=VARCHAR},
+      </if>
+      <if test="yxdm != null" >
+        Yxdm = #{yxdm,jdbcType=INTEGER},
+      </if>
+      <if test="fxmc != null" >
+        Fxmc = #{fxmc,jdbcType=VARCHAR},
+      </if>
+      <if test="xldm != null" >
+        Xldm = #{xldm,jdbcType=VARCHAR},
+      </if>
+      <if test="zydm != null" >
+        Zydm = #{zydm,jdbcType=VARCHAR},
+      </if>
+      <if test="zyfx != null" >
+        Zyfx = #{zyfx,jdbcType=VARCHAR},
+      </if>
+      <if test="pyfsdm != null" >
+        Pyfsdm = #{pyfsdm,jdbcType=INTEGER},
+      </if>
+      <if test="dxhwpdw != null" >
+        Dxhwpdw = #{dxhwpdw,jdbcType=VARCHAR},
+      </if>
+      <if test="syszddm != null" >
+        Syszddm = #{syszddm,jdbcType=INTEGER},
+      </if>
+      <if test="cxsy != null" >
+        Cxsy = #{cxsy,jdbcType=VARCHAR},
+      </if>
+      <if test="xz != null" >
+        Xz = #{xz,jdbcType=VARCHAR},
+      </if>
+      <if test="rxsj != null" >
+        Rxsj = #{rxsj,jdbcType=VARCHAR},
+      </if>
+      <if test="bysj != null" >
+        Bysj = #{bysj,jdbcType=VARCHAR},
+      </if>
+      <if test="sfslbdm != null" >
+        Sfslbdm = #{sfslbdm,jdbcType=INTEGER},
+      </if>
+      <if test="knslbdm != null" >
+        Knslbdm = #{knslbdm,jdbcType=INTEGER},
+      </if>
+      <if test="szyx != null" >
+        Szyx = #{szyx,jdbcType=VARCHAR},
+      </if>
+      <if test="szbj != null" >
+        Szbj = #{szbj,jdbcType=VARCHAR},
+      </if>
+      <if test="xh != null" >
+        Xh = #{xh,jdbcType=VARCHAR},
+      </if>
+      <if test="csrq != null" >
+        Csrq = #{csrq,jdbcType=VARCHAR},
+      </if>
+      <if test="rxqdaszdw != null" >
+        Rxqdaszdw = #{rxqdaszdw,jdbcType=VARCHAR},
+      </if>
+      <if test="rxqhkszdpcs != null" >
+        Rxqhkszdpcs = #{rxqhkszdpcs,jdbcType=VARCHAR},
+      </if>
+      <if test="dasfzrxx != null" >
+        Dasfzrxx = #{dasfzrxx,jdbcType=VARCHAR},
+      </if>
+      <if test="hksfzrxx != null" >
+        Hksfzrxx = #{hksfzrxx,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilePhone != null" >
+        MobilePhone = #{mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        Email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        Qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="jtdz != null" >
+        Jtdz = #{jtdz,jdbcType=VARCHAR},
+      </if>
+      <if test="jtdh != null" >
+        Jtdh = #{jtdh,jdbcType=VARCHAR},
+      </if>
+      <if test="jtyb != null" >
+        Jtyb = #{jtyb,jdbcType=VARCHAR},
+      </if>
+      <if test="byqxdm != null" >
+        Byqxdm = #{byqxdm,jdbcType=INTEGER},
+      </if>
+      <if test="dwzzjgdm != null" >
+        Dwzzjgdm = #{dwzzjgdm,jdbcType=VARCHAR},
+      </if>
+      <if test="dwmc != null" >
+        Dwmc = #{dwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="dwxzdm != null" >
+        Dwxzdm = #{dwxzdm,jdbcType=INTEGER},
+      </if>
+      <if test="dwhydm != null" >
+        Dwhydm = #{dwhydm,jdbcType=INTEGER},
+      </if>
+      <if test="dwszddm != null" >
+        Dwszddm = #{dwszddm,jdbcType=INTEGER},
+      </if>
+      <if test="gzzwlbdm != null" >
+        Gzzwlbdm = #{gzzwlbdm,jdbcType=INTEGER},
+      </if>
+      <if test="dwlxr != null" >
+        Dwlxr = #{dwlxr,jdbcType=VARCHAR},
+      </if>
+      <if test="lxrdh != null" >
+        Lxrdh = #{lxrdh,jdbcType=VARCHAR},
+      </if>
+      <if test="lxrsj != null" >
+        Lxrsj = #{lxrsj,jdbcType=VARCHAR},
+      </if>
+      <if test="lxrdzyx != null" >
+        Lxrdzyx = #{lxrdzyx,jdbcType=VARCHAR},
+      </if>
+      <if test="lxrcz != null" >
+        Lxrcz = #{lxrcz,jdbcType=VARCHAR},
+      </if>
+      <if test="dwdz != null" >
+        Dwdz = #{dwdz,jdbcType=VARCHAR},
+      </if>
+      <if test="dwyb != null" >
+        Dwyb = #{dwyb,jdbcType=VARCHAR},
+      </if>
+      <if test="bdzqflbdm != null" >
+        Bdzqflbdm = #{bdzqflbdm,jdbcType=INTEGER},
+      </if>
+      <if test="bdzqwdwmc != null" >
+        Bdzqwdwmc = #{bdzqwdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="qwdwszddm != null and qwdwszddm != '' " >
+        Qwdwszddm = #{qwdwszddm,jdbcType=VARCHAR},
+      </if>
+      <if test="bdzbh != null" >
+        Bdzbh = #{bdzbh,jdbcType=VARCHAR},
+      </if>
+      <if test="bdqssj != null" >
+        Bdqssj = #{bdqssj,jdbcType=VARCHAR},
+      </if>
+      <if test="dazjdwmc != null" >
+        Dazjdwmc = #{dazjdwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="dazjdwdz != null" >
+        Dazjdwdz = #{dazjdwdz,jdbcType=VARCHAR},
+      </if>
+      <if test="dazjdwyb != null" >
+        Dazjdwyb = #{dazjdwyb,jdbcType=VARCHAR},
+      </if>
+      <if test="hkqzdz != null" >
+        Hkqzdz = #{hkqzdz,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Ksh = #{ksh,jdbcType=VARCHAR}
+    and Sfzh = #{sfzh,jdbcType=VARCHAR}
+    and Bysj = #{bysj,jdbcType=VARCHAR}
+  </update>
+  
+  	<update id="updateByStudent" parameterType="com.hxci.pojo.StudentDetail" >
+    update studentdetail
+    <set >
+    		<if test="byqxdm != null" >
+        		Byqxdm = #{byqxdm,jdbcType=INTEGER},
+     	</if>
+     <if test="dwmc != null" >
+        Dwmc = #{dwmc,jdbcType=VARCHAR},
+      </if>
+      <if test="dwzzjgdm != null" >
+        Dwzzjgdm = #{dwzzjgdm,jdbcType=VARCHAR},
+      </if>
+       <if test="dwxzdm != null" >
+        Dwxzdm = #{dwxzdm,jdbcType=INTEGER},
+      </if>
+      <if test="dwhydm != null" >
+        Dwhydm = #{dwhydm,jdbcType=INTEGER},
+      </if>
+      <if test="dwszddm != null" >
+        Dwszddm = #{dwszddm,jdbcType=INTEGER},
+      </if>
+      <if test="dwdz != null" >
+        Dwdz = #{dwdz,jdbcType=VARCHAR},
+      </if>
+      <if test="dwlxr != null" >
+        Dwlxr = #{dwlxr,jdbcType=VARCHAR},
+      </if>
+      <if test="lxrdh != null" >
+        Lxrdh = #{lxrdh,jdbcType=VARCHAR},
+      </if>
+      <if test="lxrsj != null" >
+        Lxrsj = #{lxrsj,jdbcType=VARCHAR},
+      </if>
+      <if test="lxrdzyx != null" >
+        Lxrdzyx = #{lxrdzyx,jdbcType=VARCHAR},
+      </if>
+      <if test="lxrcz != null" >
+        Lxrcz = #{lxrcz,jdbcType=VARCHAR},
+      </if>
+       <if test="dwyb != null" >
+        Dwyb = #{dwyb,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilePhone != null" >
+        MobilePhone = #{mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        Email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        Qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="jtdz != null" >
+        Jtdz = #{jtdz,jdbcType=VARCHAR},
+      </if>
+      <if test="jtdh != null" >
+        Jtdh = #{jtdh,jdbcType=VARCHAR},
+      </if>
+      <if test="jtyb != null" >
+        Jtyb = #{jtyb,jdbcType=VARCHAR},
+      </if>
+      <if test="gzzwlbdm != null" >
+        Gzzwlbdm = #{gzzwlbdm,jdbcType=INTEGER},
+      </if>
+    </set>
+    where xh = #{xh,jdbcType=VARCHAR}
+      and Sfzh = #{sfzh,jdbcType=VARCHAR}
+  </update>
+  
+</mapper>

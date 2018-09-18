@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="hxci-jygl:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="hxci-jygl.war">
+      <element id="artifact" artifact-name="hxci-jygl:war exploded" />
+    </root>
+  </artifact>
+</component>

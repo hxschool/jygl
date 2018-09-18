@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hxci.dao.ZzmmMapper" >
+  <resultMap id="BaseResultMap" type="com.hxci.pojo.Zzmm" >
+    <id column="Zzmmdm" property="zzmmdm" jdbcType="VARCHAR" />
+    <result column="Zzmm" property="zzmm" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Zzmmdm, Zzmm
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from zzmm
+    where Zzmmdm = #{zzmmdm,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from zzmm
+    where Zzmmdm = #{zzmmdm,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hxci.pojo.Zzmm" >
+    insert into zzmm (Zzmmdm, Zzmm)
+    values (#{zzmmdm,jdbcType=VARCHAR}, #{zzmm,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hxci.pojo.Zzmm" >
+    insert into zzmm
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="zzmmdm != null" >
+        Zzmmdm,
+      </if>
+      <if test="zzmm != null" >
+        Zzmm,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="zzmmdm != null" >
+        #{zzmmdm,jdbcType=VARCHAR},
+      </if>
+      <if test="zzmm != null" >
+        #{zzmm,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hxci.pojo.Zzmm" >
+    update zzmm
+    <set >
+      <if test="zzmm != null" >
+        Zzmm = #{zzmm,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Zzmmdm = #{zzmmdm,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hxci.pojo.Zzmm" >
+    update zzmm
+    set Zzmm = #{zzmm,jdbcType=VARCHAR}
+    where Zzmmdm = #{zzmmdm,jdbcType=VARCHAR}
+  </update>
+</mapper>

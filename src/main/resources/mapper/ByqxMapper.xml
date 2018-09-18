@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hxci.dao.ByqxMapper" >
+  <resultMap id="BaseResultMap" type="com.hxci.pojo.Byqx" >
+    <id column="Byqxdm" property="byqxdm" jdbcType="INTEGER" />
+    <result column="Byqx" property="byqx" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Byqxdm, Byqx
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from byqx
+    where Byqxdm = #{byqxdm,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from byqx
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from byqx
+    where Byqxdm = #{byqxdm,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hxci.pojo.Byqx" >
+    insert into byqx (Byqxdm, Byqx)
+    values (#{byqxdm,jdbcType=INTEGER}, #{byqx,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hxci.pojo.Byqx" >
+    insert into byqx
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="byqxdm != null" >
+        Byqxdm,
+      </if>
+      <if test="byqx != null" >
+        Byqx,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="byqxdm != null" >
+        #{byqxdm,jdbcType=INTEGER},
+      </if>
+      <if test="byqx != null" >
+        #{byqx,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hxci.pojo.Byqx" >
+    update byqx
+    <set >
+      <if test="byqx != null" >
+        Byqx = #{byqx,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Byqxdm = #{byqxdm,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hxci.pojo.Byqx" >
+    update byqx
+    set Byqx = #{byqx,jdbcType=VARCHAR}
+    where Byqxdm = #{byqxdm,jdbcType=INTEGER}
+  </update>
+</mapper>

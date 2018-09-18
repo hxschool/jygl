@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hxci.dao.YearMapper" >
+  <resultMap id="BaseResultMap" type="com.hxci.pojo.Year" >
+    <result column="timeno" property="timeno" jdbcType="VARCHAR" />
+    <result column="timename" property="timename" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    timeno,timename
+  </sql>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from year ORDER BY timeno DESC
+  </select>
+
+  <insert id="insert" parameterType="com.hxci.pojo.Year" >
+    insert into year (timeno, timename)
+    values (#{timeno,jdbcType=VARCHAR}, #{timename,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hxci.pojo.Year" >
+    insert into year
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="timeno != null" >
+        timeno,
+      </if>
+      <if test="timename != null" >
+        timename,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="timeno != null" >
+        #{timeno,jdbcType=VARCHAR},
+      </if>
+      <if test="timename != null" >
+        #{timename,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

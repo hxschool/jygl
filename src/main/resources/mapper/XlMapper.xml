@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hxci.dao.XlMapper" >
+  <resultMap id="BaseResultMap" type="com.hxci.pojo.Xl" >
+    <id column="Xldm" property="xldm" jdbcType="VARCHAR" />
+    <result column="Xl" property="xl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Xldm, Xl
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from xl
+    where Xldm = #{xldm,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from xl
+    where Xldm = #{xldm,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hxci.pojo.Xl" >
+    insert into xl (Xldm, Xl)
+    values (#{xldm,jdbcType=VARCHAR}, #{xl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hxci.pojo.Xl" >
+    insert into xl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="xldm != null" >
+        Xldm,
+      </if>
+      <if test="xl != null" >
+        Xl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="xldm != null" >
+        #{xldm,jdbcType=VARCHAR},
+      </if>
+      <if test="xl != null" >
+        #{xl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hxci.pojo.Xl" >
+    update xl
+    <set >
+      <if test="xl != null" >
+        Xl = #{xl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Xldm = #{xldm,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hxci.pojo.Xl" >
+    update xl
+    set Xl = #{xl,jdbcType=VARCHAR}
+    where Xldm = #{xldm,jdbcType=VARCHAR}
+  </update>
+</mapper>

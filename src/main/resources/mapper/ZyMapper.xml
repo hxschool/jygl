@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hxci.dao.ZyMapper" >
+  <resultMap id="BaseResultMap" type="com.hxci.pojo.Zy" >
+    <id column="Zydm" property="zydm" jdbcType="VARCHAR" />
+    <result column="Zy" property="zy" jdbcType="VARCHAR" />
+    <result column="zycc" property="zycc" jdbcType="VARCHAR" />
+    <result column="xkdlno" property="xkdlno" jdbcType="VARCHAR" />
+    <result column="xkdlname" property="xkdlname" jdbcType="VARCHAR" />
+    <result column="xkzlno" property="xkzlno" jdbcType="INTEGER" />
+    <result column="xkzlname" property="xkzlname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Zydm, Zy, zycc, xkdlno, xkdlname, xkzlno, xkzlname
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from zy
+    where Zydm = #{zydm,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from zy
+    where Zydm = #{zydm,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hxci.pojo.Zy" >
+    insert into zy (Zydm, Zy, zycc, 
+      xkdlno, xkdlname, xkzlno, 
+      xkzlname)
+    values (#{zydm,jdbcType=VARCHAR}, #{zy,jdbcType=VARCHAR}, #{zycc,jdbcType=VARCHAR}, 
+      #{xkdlno,jdbcType=VARCHAR}, #{xkdlname,jdbcType=VARCHAR}, #{xkzlno,jdbcType=INTEGER}, 
+      #{xkzlname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hxci.pojo.Zy" >
+    insert into zy
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="zydm != null" >
+        Zydm,
+      </if>
+      <if test="zy != null" >
+        Zy,
+      </if>
+      <if test="zycc != null" >
+        zycc,
+      </if>
+      <if test="xkdlno != null" >
+        xkdlno,
+      </if>
+      <if test="xkdlname != null" >
+        xkdlname,
+      </if>
+      <if test="xkzlno != null" >
+        xkzlno,
+      </if>
+      <if test="xkzlname != null" >
+        xkzlname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="zydm != null" >
+        #{zydm,jdbcType=VARCHAR},
+      </if>
+      <if test="zy != null" >
+        #{zy,jdbcType=VARCHAR},
+      </if>
+      <if test="zycc != null" >
+        #{zycc,jdbcType=VARCHAR},
+      </if>
+      <if test="xkdlno != null" >
+        #{xkdlno,jdbcType=VARCHAR},
+      </if>
+      <if test="xkdlname != null" >
+        #{xkdlname,jdbcType=VARCHAR},
+      </if>
+      <if test="xkzlno != null" >
+        #{xkzlno,jdbcType=INTEGER},
+      </if>
+      <if test="xkzlname != null" >
+        #{xkzlname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hxci.pojo.Zy" >
+    update zy
+    <set >
+      <if test="zy != null" >
+        Zy = #{zy,jdbcType=VARCHAR},
+      </if>
+      <if test="zycc != null" >
+        zycc = #{zycc,jdbcType=VARCHAR},
+      </if>
+      <if test="xkdlno != null" >
+        xkdlno = #{xkdlno,jdbcType=VARCHAR},
+      </if>
+      <if test="xkdlname != null" >
+        xkdlname = #{xkdlname,jdbcType=VARCHAR},
+      </if>
+      <if test="xkzlno != null" >
+        xkzlno = #{xkzlno,jdbcType=INTEGER},
+      </if>
+      <if test="xkzlname != null" >
+        xkzlname = #{xkzlname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Zydm = #{zydm,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hxci.pojo.Zy" >
+    update zy
+    set Zy = #{zy,jdbcType=VARCHAR},
+      zycc = #{zycc,jdbcType=VARCHAR},
+      xkdlno = #{xkdlno,jdbcType=VARCHAR},
+      xkdlname = #{xkdlname,jdbcType=VARCHAR},
+      xkzlno = #{xkzlno,jdbcType=INTEGER},
+      xkzlname = #{xkzlname,jdbcType=VARCHAR}
+    where Zydm = #{zydm,jdbcType=VARCHAR}
+  </update>
+</mapper>

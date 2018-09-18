@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hxci.dao.YxMapper" >
+  <resultMap id="BaseResultMap" type="com.hxci.pojo.Yx" >
+    <id column="Yxdm" property="yxdm" jdbcType="INTEGER" />
+    <result column="Yxmc" property="yxmc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Yxdm, Yxmc
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from yx
+    where Yxdm = #{yxdm,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from yx
+    where Yxdm = #{yxdm,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hxci.pojo.Yx" >
+    insert into yx (Yxdm, Yxmc)
+    values (#{yxdm,jdbcType=INTEGER}, #{yxmc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hxci.pojo.Yx" >
+    insert into yx
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="yxdm != null" >
+        Yxdm,
+      </if>
+      <if test="yxmc != null" >
+        Yxmc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="yxdm != null" >
+        #{yxdm,jdbcType=INTEGER},
+      </if>
+      <if test="yxmc != null" >
+        #{yxmc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hxci.pojo.Yx" >
+    update yx
+    <set >
+      <if test="yxmc != null" >
+        Yxmc = #{yxmc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Yxdm = #{yxdm,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hxci.pojo.Yx" >
+    update yx
+    set Yxmc = #{yxmc,jdbcType=VARCHAR}
+    where Yxdm = #{yxdm,jdbcType=INTEGER}
+  </update>
+</mapper>

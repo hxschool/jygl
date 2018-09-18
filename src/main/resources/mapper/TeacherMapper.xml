@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hxci.dao.TeacherMapper" >
+  <resultMap id="BaseResultMap" type="com.hxci.pojo.Teacher" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="userpassword" property="userpassword" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="department" property="department" jdbcType="VARCHAR" />
+    <result column="zhiwu" property="zhiwu" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="fax" property="fax" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="QQ" property="qq" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, username, userpassword, name, province, department, zhiwu, tel, fax, mobile, 
+    email, QQ
+  </sql>
+  <select id="selectByLoginForTeacher" resultMap="BaseResultMap" parameterType="com.hxci.pojo.Teacher">
+
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM teacher
+    WHERE username=#{username,jdbcType=VARCHAR} AND userpassword=#{userpassword,jdbcType=VARCHAR}
+
+  </select>
+  
+  <select id="selectTeacher" resultMap="BaseResultMap" >
+
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM teacher
+  </select>
+  
+  <select id="casLogin" resultMap="BaseResultMap" parameterType="com.hxci.pojo.Teacher">
+
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM teacher
+    WHERE username=#{username,jdbcType=VARCHAR}
+
+  </select>
+  
+   <insert id="casTeacher" parameterType="com.hxci.pojo.Teacher" >
+    insert into teacher (id, username, userpassword, 
+      name, province, department, 
+      zhiwu, tel, fax, mobile, 
+      email, QQ)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{userpassword,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR}, 
+      #{zhiwu,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR})
+  </insert>
+  
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from teacher
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from teacher
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hxci.pojo.Teacher" >
+    insert into teacher (id, username, userpassword, 
+      name, province, department, 
+      zhiwu, tel, fax, mobile, 
+      email, QQ)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{userpassword,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR}, 
+      #{zhiwu,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hxci.pojo.Teacher" >
+    insert into teacher
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="userpassword != null" >
+        userpassword,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="department != null" >
+        department,
+      </if>
+      <if test="zhiwu != null" >
+        zhiwu,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="fax != null" >
+        fax,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="qq != null" >
+        QQ,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userpassword != null" >
+        #{userpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null" >
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="zhiwu != null" >
+        #{zhiwu,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hxci.pojo.Teacher" >
+    update teacher
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userpassword != null" >
+        userpassword = #{userpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null" >
+        department = #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="zhiwu != null" >
+        zhiwu = #{zhiwu,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        fax = #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        QQ = #{qq,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hxci.pojo.Teacher" >
+    update teacher
+    set username = #{username,jdbcType=VARCHAR},
+      userpassword = #{userpassword,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      department = #{department,jdbcType=VARCHAR},
+      zhiwu = #{zhiwu,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      fax = #{fax,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      QQ = #{qq,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateResTeacherPassword" parameterType="com.hxci.pojo.Teacher" >
+    update teacher
+    set 
+      userpassword = #{userpassword,jdbcType=VARCHAR}
+    		where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByTeacher" parameterType="java.lang.Integer" >
+  		delete from teacher where id=#{id}
+  </delete>
+  
+</mapper>

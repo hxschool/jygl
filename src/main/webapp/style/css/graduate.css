@@ -1,0 +1,48 @@
+/*
+*姣曚笟鐢熺鐞嗗叕鍏辨牱寮�
+*/
+
+/*姣曚笟鐢熺鐞嗗瓙瀵艰埅鏍峰紡璋冩暣*/
+.graduate-navbar {border-bottom:1px solid #d9d9d9; min-height:40px;}
+#graduate-nav-wrap {height:50px;}
+#graduate-nav-wrap > .navbar-left{margin:0px 30px 0px 0px;}
+#graduate-nav-wrap > .navbar-left > li >a {height:55px;font-size:21px;line-height:55px;padding:0px;}
+#graduate-menu-nav {height:55px;}
+#graduate-menu-nav>li {height:55px; padding:0 15px;}
+#graduate-menu-nav>li>a {padding:0; line-height:50px;font-size:15px; color:#383838;}
+#graduate-menu-nav>li>a:hover {background-color:inherit; border-bottom: 4px solid #03a9f4;}
+#graduate-menu-nav>li.subactive > a {border-bottom: 4px solid #03a9f4;}
+
+/*姝ュ瀵艰埅鏍峰紡  */
+.wizard {position:relative;margin:10px 50px;}
+.wizard ul.wizard-steps {margin:0px;padding:0px; background:#fff;}
+.wizard .wizard-steps li {display:inline-block; position:relative; margin-right:5px; list-style:none; padding-right:17px; padding-left:30px; zoom:1; background-color:#b0b0b0; text-align:center;}
+.wizard .wizard-steps li:before {position:absolute; left:0; top:0; height:0;width:0;border-bottom:20px inset transparent;border-left:20px solid #fff;border-top:20px inset transparent;content:"";}
+.wizard .wizard-steps li:after {position:absolute; top:0; right:-20px;height:0;width:0;border-bottom:20px inset transparent;border-left:20px solid #b0b0b0;border-top:20px inset transparent;content:""; z-index:2}
+.wizard .wizard-steps li:first-child {padding-left:25px;}
+.wizard .wizard-steps li:first-child:before {border:none;}
+.wizard .wizard-steps li:last-child {padding-right:25px;}
+.wizard .wizard-steps li:last-child:after {border:0;}
+.wizard .wizard-steps li a {cursor:default;text-decoration:none;color:#fff; font-size:14px; line-height:40px; font-weight:bold; cursor:pointer;}
+.wizard .wizard-steps li.active {background-color:#60A917;}
+.wizard .wizard-steps li.active:after {border-left-color:#60A917;}
+.wizard .wizard-steps li.active a {color:#fff;}
+.wizard .wizard-steps li {width:24%;}
+/*姝ュ瀵艰埅鏍峰紡   test*/
+		.wizard-steps {margin:0px;padding:0px; background:#fff;}
+		.wizard-steps li {display:inline-block; position:relative; list-style:none; padding-right:17px; padding-left:30px; zoom:1; background-color:#b0b0b0; text-align:center;}
+ 		.wizard-steps li:before {position:absolute; left:0; top:0; height:0;width:0;border-bottom:20px inset transparent;border-left:20px solid #fff;border-top:20px inset transparent;content:"";}
+ 		.wizard-steps li:after {position:absolute; top:0; right:-20px;height:0;width:0;border-bottom:20px inset transparent;border-left:20px solid #b0b0b0;border-top:20px inset transparent;content:""; z-index:2}
+ 		.wizard-steps li:first-child {padding-left:25px;}
+ 		.wizard-steps li:first-child:before {border:none;}
+ 		.wizard-steps li:last-child {padding-right:25px;}
+ 		.wizard-steps li:last-child:after {border:0;}
+ 		.wizard-steps li a {cursor:default;text-decoration:none;color:#fff; font-size:14px; line-height:40px; font-weight:bold;}
+ 		.wizard-steps li.active {background-color:#60A917;}
+ 		.wizard-steps li.active:after {border-left-color:#60A917;}
+ 		.wizard-steps li.active a {color:#fff; cursor:default;}
+ 		.wizard-steps li {width:19.5%;}
+ 		.procedure{width:100%;}
+		.procedure-list{width:100%;margin:0px;padding:0px;list-style-type: none;background-color:#FFF;}
+		.procedure-list>li{display:inline-block;position:relative;text-align:center;}
+		.procedure-content>.procedure-box{display:none;padding:15px;}

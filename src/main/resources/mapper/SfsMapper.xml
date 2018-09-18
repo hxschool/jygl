@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hxci.dao.SfsMapper" >
+  <resultMap id="BaseResultMap" type="com.hxci.pojo.Sfs" >
+    <id column="Sfslbdm" property="sfslbdm" jdbcType="INTEGER" />
+    <result column="Sfslb" property="sfslb" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Sfslbdm, Sfslb
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sfs
+    where Sfslbdm = #{sfslbdm,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sfs
+    where Sfslbdm = #{sfslbdm,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hxci.pojo.Sfs" >
+    insert into sfs (Sfslbdm, Sfslb)
+    values (#{sfslbdm,jdbcType=INTEGER}, #{sfslb,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hxci.pojo.Sfs" >
+    insert into sfs
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sfslbdm != null" >
+        Sfslbdm,
+      </if>
+      <if test="sfslb != null" >
+        Sfslb,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sfslbdm != null" >
+        #{sfslbdm,jdbcType=INTEGER},
+      </if>
+      <if test="sfslb != null" >
+        #{sfslb,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hxci.pojo.Sfs" >
+    update sfs
+    <set >
+      <if test="sfslb != null" >
+        Sfslb = #{sfslb,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Sfslbdm = #{sfslbdm,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hxci.pojo.Sfs" >
+    update sfs
+    set Sfslb = #{sfslb,jdbcType=VARCHAR}
+    where Sfslbdm = #{sfslbdm,jdbcType=INTEGER}
+  </update>
+</mapper>

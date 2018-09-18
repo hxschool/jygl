@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hxci.dao.MzMapper" >
+  <resultMap id="BaseResultMap" type="com.hxci.pojo.Mz" >
+    <id column="Mzdm" property="mzdm" jdbcType="VARCHAR" />
+    <result column="Mz" property="mz" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Mzdm, Mz
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from mz
+    where Mzdm = #{mzdm,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from mz
+    where Mzdm = #{mzdm,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hxci.pojo.Mz" >
+    insert into mz (Mzdm, Mz)
+    values (#{mzdm,jdbcType=VARCHAR}, #{mz,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hxci.pojo.Mz" >
+    insert into mz
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mzdm != null" >
+        Mzdm,
+      </if>
+      <if test="mz != null" >
+        Mz,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mzdm != null" >
+        #{mzdm,jdbcType=VARCHAR},
+      </if>
+      <if test="mz != null" >
+        #{mz,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hxci.pojo.Mz" >
+    update mz
+    <set >
+      <if test="mz != null" >
+        Mz = #{mz,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Mzdm = #{mzdm,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hxci.pojo.Mz" >
+    update mz
+    set Mz = #{mz,jdbcType=VARCHAR}
+    where Mzdm = #{mzdm,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hxci.dao.PyfsMapper" >
+  <resultMap id="BaseResultMap" type="com.hxci.pojo.Pyfs" >
+    <id column="Pyfsdm" property="pyfsdm" jdbcType="INTEGER" />
+    <result column="Pyfs" property="pyfs" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Pyfsdm, Pyfs
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from pyfs
+    where Pyfsdm = #{pyfsdm,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from pyfs
+    where Pyfsdm = #{pyfsdm,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hxci.pojo.Pyfs" >
+    insert into pyfs (Pyfsdm, Pyfs)
+    values (#{pyfsdm,jdbcType=INTEGER}, #{pyfs,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hxci.pojo.Pyfs" >
+    insert into pyfs
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pyfsdm != null" >
+        Pyfsdm,
+      </if>
+      <if test="pyfs != null" >
+        Pyfs,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pyfsdm != null" >
+        #{pyfsdm,jdbcType=INTEGER},
+      </if>
+      <if test="pyfs != null" >
+        #{pyfs,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hxci.pojo.Pyfs" >
+    update pyfs
+    <set >
+      <if test="pyfs != null" >
+        Pyfs = #{pyfs,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Pyfsdm = #{pyfsdm,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hxci.pojo.Pyfs" >
+    update pyfs
+    set Pyfs = #{pyfs,jdbcType=VARCHAR}
+    where Pyfsdm = #{pyfsdm,jdbcType=INTEGER}
+  </update>
+</mapper>

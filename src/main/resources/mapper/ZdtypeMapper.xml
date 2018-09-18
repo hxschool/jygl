@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hxci.dao.ZdtypeMapper" >
+  <resultMap id="BaseResultMap" type="com.hxci.pojo.Zdtype" >
+    <id column="Zddm" property="zddm" jdbcType="VARCHAR" />
+    <result column="Zdmc" property="zdmc" jdbcType="VARCHAR" />
+    <result column="Px" property="px" jdbcType="INTEGER" />
+  </resultMap>
+
+  <resultMap id="getAllSetDaysResult"   type="HashMap">
+    <id column="Zddm" property="key" jdbcType="VARCHAR" />
+    <result column="Zdmc" property="value" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    Zddm, Zdmc, Px
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from zdtype
+    where Zddm = #{zddm,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    SELECT * FROM zdtype ORDER BY Px ASC
+  </select>
+  <select id="selectAllByMap" resultMap="getAllSetDaysResult">
+    SELECT * FROM zdtype ORDER BY Px ASC
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from zdtype
+    where Zddm = #{zddm,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hxci.pojo.Zdtype" >
+    insert into zdtype (Zddm, Zdmc, Px
+      )
+    values (#{zddm,jdbcType=VARCHAR}, #{zdmc,jdbcType=VARCHAR}, #{px,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hxci.pojo.Zdtype" >
+    insert into zdtype
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="zddm != null" >
+        Zddm,
+      </if>
+      <if test="zdmc != null" >
+        Zdmc,
+      </if>
+      <if test="px != null" >
+        Px,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="zddm != null" >
+        #{zddm,jdbcType=VARCHAR},
+      </if>
+      <if test="zdmc != null" >
+        #{zdmc,jdbcType=VARCHAR},
+      </if>
+      <if test="px != null" >
+        #{px,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hxci.pojo.Zdtype" >
+    update zdtype
+    <set >
+      <if test="zdmc != null" >
+        Zdmc = #{zdmc,jdbcType=VARCHAR},
+      </if>
+      <if test="px != null" >
+        Px = #{px,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Zddm = #{zddm,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hxci.pojo.Zdtype" >
+    update zdtype
+    set Zdmc = #{zdmc,jdbcType=VARCHAR},
+      Px = #{px,jdbcType=INTEGER}
+    where Zddm = #{zddm,jdbcType=VARCHAR}
+  </update>
+</mapper>
